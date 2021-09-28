@@ -12,7 +12,7 @@
 
     <main>
         <div class="start" data-state="shown">
-            <button  id="start-btn">Start Quiz</button>
+            <button id="start-btn">Start Quiz</button>
         </div>
 
         <div class="timer" data-state="hidden">
@@ -25,6 +25,19 @@
             <button class="answerBox" id="answer2" answer-number="2"></button>
             <button class="answerBox" id="answer3" answer-number="3"></button>
             <button class="answerBox" id="answer4" answer-number="4"></button>
+        </div>
+
+        <div class="save-score">
+            <h1>All done!</h1>
+            <p id="yourScore"></p>
+            <input type="submit">
+        </div>
+
+        <div class="score-board">
+            <h1>Highscores</h1>
+            <h2 class="highscore" id="top1"></h2>
+            <h2 class="highscore" id="top2"></h2>
+            <h2 class="highscore" id="top3"></h2>
         </div>
     </main>
     <script src="./assets/js/script.js"></script>

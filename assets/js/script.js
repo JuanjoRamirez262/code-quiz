@@ -4,8 +4,8 @@ var answer2Display = document.querySelector("#answer2");
 var answer3Display = document.querySelector("#answer3");
 var answer4Display = document.querySelector("#answer4");
 var quizBox = document.querySelector(".quiz");
-var quizTimer = document.querySelector("#timerCountdown");
-var startBtn = document.querySelector("#start-btn")
+var quizTimer = document.querySelector(".timer");
+var startBtn = document.querySelector(".start")
 var score = 0;
 var timerCountdown = 60;
 var actualQuizQuestion = 0;
@@ -117,9 +117,10 @@ function changeStartBtnState() {
         startBtn.setAttribute("data-state", "hidden");
         startBtn.style.display = "none";
     }
-}
+};
 
 function startQuiz(){
+    score = 0;
     actualQuizQuestion = randomQuestion();
     displayRandomQuestion(actualQuizQuestion);
     changeState();
@@ -143,7 +144,10 @@ function setTimer(){
             clearInterval(timerInterval)
 
             changeState();
+            changeStartBtnState();
             //TODO: stop quiz
         }
     }, 1000);
 }
+
+function showScoreboard(){}
