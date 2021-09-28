@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Quiz</title>
 </head>
@@ -13,12 +11,20 @@
 <body>
 
     <main>
-        <div class="questions">
+        <div class="start" data-state="shown">
+            <button  id="start-btn">Start Quiz</button>
+        </div>
+
+        <div class="timer" data-state="hidden">
+            <h3 id="timerCountdown"></h3>
+        </div>
+
+        <div class="quiz" data-state="hidden">
             <h1 id="question"></h1>
-            <button id="aswer1"></button>
-            <button id="aswer2"></button>
-            <button id="aswer3"></button>
-            <button id="aswer4"></button>
+            <button class="answerBox" id="answer1" answer-number="1"></button>
+            <button class="answerBox" id="answer2" answer-number="2"></button>
+            <button class="answerBox" id="answer3" answer-number="3"></button>
+            <button class="answerBox" id="answer4" answer-number="4"></button>
         </div>
     </main>
     <script src="./assets/js/script.js"></script>
