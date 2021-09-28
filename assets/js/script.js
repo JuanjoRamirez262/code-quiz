@@ -150,4 +150,6 @@ function setTimer(){
     }, 1000);
 }
 
-function showScoreboard(){}
+function showScoreboard(){
+    
+}
