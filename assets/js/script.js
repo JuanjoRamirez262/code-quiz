@@ -6,9 +6,20 @@ var answer4Display = document.querySelector("#answer4");
 var quizBox = document.querySelector(".quiz");
 var quizTimer = document.querySelector(".timer");
 var startBtn = document.querySelector(".start")
+var yourScore = document.querySelector("#your-score");
+var saveScore = document.querySelector(".save-score");
+var submitScore = document.querySelector("#submit-score");
+var scoreInitials = document.querySelector("#score-initials");
+var scoreForm = document.querySelector("#scoreForm")
+var highScoreBoard = document.querySelector(".score-board");
+var top1 = document.querySelector("#top1");
+var top2 = document.querySelector("#top2");
+var top3 = document.querySelector("#top3");
 var score = 0;
 var timerCountdown = 60;
 var actualQuizQuestion = 0;
+var highScores = JSON.parse(localStorage.getItem("highscore")); // highScores = {highscores=[{h1={name:name, score:score}}, {h2}, {h3}, {AS}]}
+
 
 var questionsArray = [
     {
@@ -52,25 +63,45 @@ var questionArrayLenght = questionsArray.length
 
 startBtn.addEventListener("click", startQuiz)
 
-quizBox.addEventListener("click", function(event){
+quizBox.addEventListener("click", function (event) {
+    event.preventDefault();
     var element = event.target;
-    
 
-    if (element.matches(".answerBox")){
+    if (element.matches(".answerBox")) {
         var answerNumber = element.getAttribute("answer-number")
-        // console.log(answerNumber);
-         var answerChecked = checkAnswer(answerNumber, actualQuizQuestion);
-         if(answerChecked){
-             score++
-         } else {
+        var answerChecked = checkAnswer(answerNumber, actualQuizQuestion);
+        if (answerChecked) {
+            score++
+        } else {
             timerCountdown -= 5
-         }
+        }
         nextQuestion();
     }
 });
 
-function checkAnswer(answerElement, questionJSON){
-    if (answerElement == questionJSON.correctAnswerIndex ){
+scoreForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    var actualScore = {
+        name: scoreInitials.value,
+        score: score
+    }
+    highScores.scoreBoard.push(actualScore);
+    sortAndDeleteLowerScore();
+    hideSaveScore();
+    showStartBtn();
+    showScoreBoard();
+});
+
+function sortAndDeleteLowerScore() {
+    highScores.scoreBoard.sort((a, b) => {
+        return new Date(b.score) - new Date(a.score);
+    })
+    highScores.scoreBoard.splice(highScores.scoreBoard.length - 1, 1)
+    localStorage.setItem("highscore", JSON.stringify(highScores));
+};
+
+function checkAnswer(answerElement, questionJSON) {
+    if (answerElement == questionJSON.correctAnswerIndex) {
         return true
     } else {
         return false
@@ -90,66 +121,83 @@ function displayRandomQuestion(questionJSON) {
     answer4Display.textContent = "4. " + questionJSON.answer4;
 };
 
-function changeState() {
-    quizBoxState = quizBox.getAttribute("data-state");
-    if (quizBoxState == "hidden"){
-        quizBox.setAttribute("data-state", "shown")
-        quizBox.style.display = "block";
-        
-        quizTimer.setAttribute("data-state", "shown")
-        quizTimer.style.display = "block";
-
-    } else if (quizBoxState == "shown"){
-        quizBox.setAttribute("data-state", "hidden");
-        quizBox.style.display = "none";
-
-        quizTimer.setAttribute("data-state", "hidden");
-        quizTimer.style.display = "none";
-    }
+function showQuizAndTimer() {
+    quizBox.style.display = "block";
+    quizTimer.style.display = "block";
 };
 
-function changeStartBtnState() {
-    startBtnState = startBtn.getAttribute("data-state");
-    if (startBtnState == "hidden"){
-        startBtn.setAttribute("data-state", "shown")
-        startBtn.style.display = "block";
-    } else if (startBtnState == "shown"){
-        startBtn.setAttribute("data-state", "hidden");
-        startBtn.style.display = "none";
-    }
+function hideQuizAndTimer() {
+    quizBox.style.display = "none";
+    quizTimer.style.display = "none";
 };
 
-function startQuiz(){
+function showStartBtn() {
+    startBtn.style.display = "block";
+};
+
+function hideStarBtn() {
+    startBtn.style.display = "none";
+};
+
+function showSaveScore() {
+    saveScore.style.display = "block";
+};
+
+function hideSaveScore() {
+    saveScore.style.display = "none";
+};
+
+function startQuiz() {
     score = 0;
     actualQuizQuestion = randomQuestion();
     displayRandomQuestion(actualQuizQuestion);
-    changeState();
-    changeStartBtnState();
+    showQuizAndTimer();
+    hideStarBtn();
+    hideScoreBoard();
+    hideSaveScore();
     setTimer();
 };
 
-function nextQuestion(){
+function nextQuestion() {
     actualQuizQuestion = randomQuestion();
     displayRandomQuestion(actualQuizQuestion);
 };
 
-function setTimer(){
-    timerCountdown = 20;
+function setTimer() {
+    timerCountdown = 60;
 
-    var timerInterval = setInterval(function() {
+    var timerInterval = setInterval(function () {
         timerCountdown--;
-        quizTimer.textContent = timerCountdown + " secs"
+        quizTimer.textContent = timerCountdown + " seconds"
 
-        if(timerCountdown < 0){
+        if (timerCountdown < 0) {
             clearInterval(timerInterval)
 
-            changeState();
-            changeStartBtnState();
+            hideQuizAndTimer();
+            showStartBtn();
+            showSaveScore();
             //TODO: stop quiz
+            showActualScore();
         }
     }, 1000);
-}
+};
 
-function showScoreboard(){
-    
+function showActualScore() {
+    yourScore.textContent = "Your score: " + score
+};
+
+function showScoreBoard() {
+    highScoreBoard.style.display = "block";
+    if (highScores.scoreBoard.length > 0) {
+        top1.textContent = "Top 1: " + highScores.scoreBoard[0].name + " with " + highScores.scoreBoard[0].score + " points";
+    }
+    if (highScores.scoreBoard.length > 1) {
+        top2.textContent = "Top 2: " + highScores.scoreBoard[1].name + " with " + highScores.scoreBoard[1].score + " points";
+    }
+    if (highScores.scoreBoard.length > 2) {
+        top3.textContent = "Top 3: " + highScores.scoreBoard[2].name + " with " + highScores.scoreBoard[2].score + " points";
+    }
+}
+function hideScoreBoard() {
+    highScoreBoard.style.display = "none"
 }

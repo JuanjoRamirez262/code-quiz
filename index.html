@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,15 +12,15 @@
 <body>
 
     <main>
-        <div class="start" data-state="shown">
+        <div class="start" >
             <button id="start-btn">Start Quiz</button>
         </div>
 
-        <div class="timer" data-state="hidden">
-            <h3 id="timerCountdown"></h3>
+        <div class="timer" >
+            <p id="timerCountdown">60 seconds</p>
         </div>
 
-        <div class="quiz" data-state="hidden">
+        <div class="quiz">
             <h1 id="question"></h1>
             <button class="answerBox" id="answer1" answer-number="1"></button>
             <button class="answerBox" id="answer2" answer-number="2"></button>
@@ -29,8 +30,11 @@
 
         <div class="save-score">
             <h1>All done!</h1>
-            <p id="yourScore"></p>
-            <input type="submit">
+            <p id="your-score"></p>
+            <form id="scoreForm">
+                <input type="text" name="initials" id="score-initials">
+                <input type="submit" id="submit-score" value="Submit score">
+            </form>
         </div>
 
         <div class="score-board">
