@@ -23,39 +23,39 @@ var highScores = JSON.parse(localStorage.getItem("highscore")); // highScores = 
 
 var questionsArray = [
     {
-        question: "Question #1",
-        answer1: "Good anwer",
-        answer2: "Bad answer",
-        answer3: "Bad answer",
-        answer4: "Bad answer",
+        question: "The answer is really big.",
+        answer1: "THE ANSWER",
+        answer2: "Really big",
+        answer3: "An elephant",
+        answer4: "The data given is insufficient",
         correctAnswerIndex: "1"
     }, {
-        question: "Question #2",
-        answer1: "Bad answer",
-        answer2: "Good anwer",
-        answer3: "Bad answer",
-        answer4: "Bad answer",
-        correctAnswerIndex: "2"
+        question: "If a leaf falls to the ground in a forest and no one hears it, does it make a sound? ",
+        answer1: "Yes",
+        answer2: "No",
+        answer3: "Depends on how heavy the leaf was",
+        answer4: "Depend on where it landed",
+        correctAnswerIndex: "1"
     }, {
-        question: "Question #3",
-        answer1: "Bad answer",
-        answer2: "Bad answer",
-        answer3: "Good anwer",
-        answer4: "Bad answer",
+        question: "Divide 30 by half and add ten",
+        answer1: "40.5",
+        answer2: "50",
+        answer3: "40",
+        answer4: "70",
         correctAnswerIndex: "3"
     }, {
-        question: "Question #4",
-        answer1: "Bad answer",
-        answer2: "Bad answer",
-        answer3: "Bad answer",
-        answer4: "Good anwer",
-        correctAnswerIndex: "4"
+        question: "The answer is the second option",
+        answer1: "Not this one",
+        answer2: "This one!",
+        answer3: "the second option",
+        answer4: "Look above",
+        correctAnswerIndex: "2"
     }, {
-        question: "Question #5",
-        answer1: "Good anwer",
-        answer2: "Bad answer",
-        answer3: "Bad answer",
-        answer4: "Bad answer",
+        question: "How many 1 inch slices of bread can you cut from a whole bread that's 10 inches long?",
+        answer1: "1",
+        answer2: "10",
+        answer3: "9",
+        answer4: "why you ask this tricky questions?",
         correctAnswerIndex: "1"
     }];
 
